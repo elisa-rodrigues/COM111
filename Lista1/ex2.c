@@ -1,3 +1,25 @@
+/*
+Crie um registro (struct) ALUNO que contenha os seguintes campos:
+  int matricula;
+	char nome[50];
+	int dia\_nasc;
+	int mes\_nasc;
+	int ano\_nasc; 
+	float nota;
+
+Escreva um programa que leia o número n de alunos a serem cadastrados. Em seguida, um vetor V com n posições deve ser alocado 
+dinamicamente usando uma função que retorna um ponteiro do tipo ALUNO. O programa deve preencher o vetor V e imprimir o 
+registro dos alunos aprovados, isto é, com nota maior ou igual a 6,0. Para executar tais tarefas devem ser criadas funções para:
+a) Alocar memória dinamicamente para um vetor do tipo ALUNO.
+b) Preencher o vetor de alunos.
+c) Imprimir o vetor de alunos.
+d) Preencher o registro de um aluno.
+e) Imprimir o registro de um aluno.
+*/
+
+// Autor: Elisa de Cássia Silva Rodrigues
+// Setembro de 2020
+
 
 /***********************************************************************/
 #include <stdio.h>
@@ -15,9 +37,9 @@ typedef struct ALUNO{
   float nota;
 }ALUNO;
 
-/***********************************************************************/
-/** Protótipos de funções                                              */
-/***********************************************************************/
+// ***********************************************************************
+// Protótipos de funções                                              
+// ***********************************************************************
 ALUNO *alocarVetorInt(int n);
 
 void preencherVetor(int n, ALUNO *v);
@@ -27,9 +49,9 @@ void cadastrarAluno(ALUNO *aluno);
 void imprimirAluno(ALUNO aluno);
 
 
-/***********************************************************************/
-/** Função principal                                                   */
-/***********************************************************************/
+// ***********************************************************************
+// Função principal                                                  
+// ***********************************************************************
 int main(void) 
 {
   int n;
@@ -71,9 +93,9 @@ int main(void)
 }
 
 
-/********************************************************************/
-/** Função para alocar memória para vetor com n elementos           */
-/********************************************************************/
+// ***********************************************************************
+// Função para alocar memória para vetor com n elementos           
+// ***********************************************************************
 ALUNO *alocarVetorInt(int n)
 {
   // declara um ponteiro de ponteiro
@@ -89,9 +111,9 @@ ALUNO *alocarVetorInt(int n)
   return v;
 }
 
-/********************************************************************/
-/** Função para preencher vetor com valores digitados pelo usuário */
-/********************************************************************/
+//***********************************************************************
+// Função para preencher vetor com valores digitados pelo usuário 
+// **********************************************************************
 void preencherVetor(int n, ALUNO *v)
 {
   // cadastra n registros do tipo ALUNO
@@ -103,9 +125,9 @@ void preencherVetor(int n, ALUNO *v)
   }
 }
 
-/******************************************************************/
-/** Função para imprimir vetor                                   */
-/******************************************************************/
+// ***********************************************************************
+// Função para imprimir vetor                                   
+// ***********************************************************************
 void imprimirVetor(int n, ALUNO *v)
 {
   // imprime n registros do tipo ALUNO
@@ -117,9 +139,9 @@ void imprimirVetor(int n, ALUNO *v)
   }
 }
 
-/******************************************************************/
-/** Função para cadastrar um registro do tipo ALUNO               */
-/******************************************************************/
+// ***********************************************************************
+// Função para cadastrar um registro do tipo ALUNO               
+// ***********************************************************************
 void cadastrarAluno(ALUNO *aluno)
 {
     do{
@@ -145,9 +167,9 @@ void cadastrarAluno(ALUNO *aluno)
 }
 
 
-/******************************************************************/
+//***********************************************************************
 /** Função para imprimir um registro do tipo ALUNO                */
-/******************************************************************/
+//***********************************************************************
 void imprimirAluno(ALUNO aluno)
 {
     printf("\n Matrícula: %d ", aluno.matricula); 
