@@ -1,4 +1,4 @@
-COM111 - Algoritmo e Estrutura de Dados - Universidade Federal de Itajubá
+# COM111 - Algoritmo e Estrutura de Dados - Universidade Federal de Itajubá
 
 Repositório de informações da disciplina COM111
 
