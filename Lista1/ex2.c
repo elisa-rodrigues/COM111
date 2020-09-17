@@ -1,3 +1,5 @@
+
+/***********************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -89,8 +91,7 @@ ALUNO *alocarVetorInt(int n)
 
 /********************************************************************/
 /** Função para preencher vetor com valores digitados pelo usuário */
-/******************************12
-**************************************/
+/********************************************************************/
 void preencherVetor(int n, ALUNO *v)
 {
   // cadastra n registros do tipo ALUNO
@@ -117,7 +118,7 @@ void imprimirVetor(int n, ALUNO *v)
 }
 
 /******************************************************************/
-/** Função para cadastrar um registro do tipo ALUNO                                   */
+/** Função para cadastrar um registro do tipo ALUNO               */
 /******************************************************************/
 void cadastrarAluno(ALUNO *aluno)
 {
@@ -145,7 +146,7 @@ void cadastrarAluno(ALUNO *aluno)
 
 
 /******************************************************************/
-/** Função para imprimir um registro do tipo ALUNO                                  */
+/** Função para imprimir um registro do tipo ALUNO                */
 /******************************************************************/
 void imprimirAluno(ALUNO aluno)
 {
