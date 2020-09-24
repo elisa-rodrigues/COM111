@@ -27,8 +27,8 @@ int main(void) {
 
   // Demonstra os números complexos criados
   printf("\n[VALORES]\n");
-  imprimirComplexo("Complexo 1: ", c1);
-  imprimirComplexo("Complexo 2: ", c2);
+  imprimirComplexo("Complexo 1:", c1);
+  imprimirComplexo("Complexo 2:", c2);
 
   // Resultados das operações 
   Complexo soma = somarComplexo(c1, c2);
@@ -38,10 +38,10 @@ int main(void) {
 
   // Demonstra os resultados na tela
   printf("\n[RESULTADOS]\n");
-  imprimirComplexo("Soma: ", soma);
-  imprimirComplexo("Subtracao: ", subtracao);
-  imprimirComplexo("Multiplicacao: ", multiplicacao);
-  imprimirComplexo("Divisao: ", divisao);
+  imprimirComplexo("Soma:", soma);
+  imprimirComplexo("Subtracao:", subtracao);
+  imprimirComplexo("Multiplicacao:", multiplicacao);
+  imprimirComplexo("Divisao:", divisao);
 
   // Libera toda a memória alocada
   liberarComplexo(c1);
