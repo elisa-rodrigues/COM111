@@ -5,11 +5,11 @@
 #include "listaEncadeada.h"
 
 void criar_dado(aluno *dado);
-void menu(Lista *li, aluno dado);
+void menu(Lista **li, aluno dado);
 
 // funcao principal
 int main(void) {
-    Lista *li1, *li2 = NULL, *lista_concatenada;
+    Lista *li1 = NULL, *li2 = NULL, *lista_concatenada = NULL;
     int opcao;
     aluno dado;
 
@@ -28,18 +28,16 @@ int main(void) {
         switch (opcao) {
             case 1:
                 // exibe menu crud da lista1
-                menu(li1, dado);
-                imprimir_lista(li1);
+                menu(&li1, dado);
                 break;
             case 2:
                 // exibe menu crud da lista2
-                menu(li2, dado);
+                menu(&li2, dado);
                 break;
             case 3:
                 // concatena e coloca na terceira lista
-                lista_concatenada = criar_lista();
                 lista_concatenada = concatenar(li1, li2);
-                printf("\nLista concatenada: ");
+                printf("\nLista concatenada: \n");
                 imprimir_lista(lista_concatenada);
                 break;
             case 4:
@@ -75,8 +73,8 @@ int main(void) {
     return 0;
 }
 
-void menu(Lista *li, aluno dado) {
-    int opcaoMenu = 0, pos;
+void menu(Lista **li, aluno dado) {
+    int opcaoMenu = 0, pos, flag;
 
     do {
         printf("\n\n\n		Menu de opções:");
@@ -100,7 +98,7 @@ void menu(Lista *li, aluno dado) {
         switch (opcaoMenu) {
             case 1:
                 // criar lista
-                li = criar_lista();
+                *li = criar_lista();
                 if (li != NULL)
                     printf("\n Lista criada com sucesso!");
                 else
@@ -109,7 +107,7 @@ void menu(Lista *li, aluno dado) {
                 break;
             case 2:
                 // liberar lista
-                if (liberar_lista(li))
+                if (liberar_lista(*li))
                     printf("\n Lista liberada com sucesso!");
                 else
                     printf("\n Lista não liberada!");
@@ -118,7 +116,7 @@ void menu(Lista *li, aluno dado) {
             case 3:
                 // inserir elemento no início
                 criar_dado(&dado);
-                if (inserir_lista_inicio(li, dado))
+                if (inserir_lista_inicio(*li, dado))
                     printf("\n Inserção realizada com sucesso!");
                 else
                     printf("\n Falha na inserção!");
@@ -127,7 +125,7 @@ void menu(Lista *li, aluno dado) {
             case 4:
                 // inserir elemento no final
                 criar_dado(&dado);
-                if (inserir_lista_final(li, dado))
+                if (inserir_lista_final(*li, dado))
                     printf("\n Inserção realizada com sucesso!");
                 else
                     printf("\n Falha na inserção!");
@@ -136,7 +134,7 @@ void menu(Lista *li, aluno dado) {
             case 5:
                 // inserir elemento de forma ordenada
                 criar_dado(&dado);
-                if (inserir_lista_ordenada(li, dado))
+                if (inserir_lista_ordenada(*li, dado))
                     printf("\n Inserção realizada com sucesso!");
                 else
                     printf("\n Falha na inserção!");
@@ -144,7 +142,7 @@ void menu(Lista *li, aluno dado) {
                 break;
             case 6:
                 // remover elemento do início
-                if (remover_lista_inicio(li))
+                if (remover_lista_inicio(*li))
                     printf("\n Remoção realizada com sucesso!");
                 else
                     printf("\n Falha na remoção!");
@@ -152,7 +150,7 @@ void menu(Lista *li, aluno dado) {
                 break;
             case 7:
                 // remover elemento do final
-                if (remover_lista_final(li))
+                if (remover_lista_final(*li))
                     printf("\n Remoção realizada com sucesso!");
                 else
                     printf("\n Falha na remoção!");
@@ -163,7 +161,7 @@ void menu(Lista *li, aluno dado) {
                 printf("\n Matricula a ser removida: ");
                 scanf("%d", &dado.matricula);
 
-                if (remover_lista_meio(li, dado))
+                if (remover_lista_meio(*li, dado))
                     printf("\n Remoção realizada com sucesso!");
                 else
                     printf("\n Falha na remoção!");
@@ -173,7 +171,7 @@ void menu(Lista *li, aluno dado) {
                 // busca elemento pela posicao
                 printf("\n Posição do elemento a ser buscado: ");
                 scanf("%d", &pos);
-                if (buscar_lista_posicao(li, pos, dado)) {
+                if (buscar_lista_posicao(*li, pos, dado)) {
                     printf("\n Busca realizada com sucesso!");
                     printf("\n Elemento da %dª posição: ", pos);
                     printf("%d", dado.matricula);
@@ -188,7 +186,7 @@ void menu(Lista *li, aluno dado) {
                 printf("\n Matricula a ser buscada: ");
                 scanf("%d", &dado.matricula);
 
-                if (buscar_lista_dado(li, dado, &pos)) {
+                if (buscar_lista_dado(*li, dado, &pos)) {
                     printf("\n Busca realizada com sucesso!");
                     printf("\n Elemento da %dª posição: ", pos);
                     printf("%d", dado.matricula);
@@ -201,22 +199,25 @@ void menu(Lista *li, aluno dado) {
             case 11:
                 // imprime a lista
                 printf("\n Lista encadeada: \n");
-                if (!imprimir_lista(li))
+                if (!imprimir_lista(*li))
                     printf("\n Lista não encontrada!");
 
                 break;
             case 12:
                 // imprime o tamanho da lista
                 printf("\nTamanho da lista: ");
-                printf("\n%d", tamanho_lista(*li));
+                printf("\n%d", tamanho_lista(**li));
                 break;
             case 13:
                 // verifica a ordenação da lista
-                if (verifica_ordenacao(li))
-                    printf("\nA lista esta ordenada.");
-                else
-                    printf("\nA lista não esta ordenada.");
+                flag = verifica_ordenacao(*li);
 
+                if (flag == 0)
+                    printf("\nA lista nao esta ordenada.");
+                else if (flag == 1)
+                    printf("\nA lista esta ordenada crescentemente.");
+                else
+                    printf("\nA lista esta ordenada decrescentemente.");
                 break;
             case 14:
                 // retorna ao menu anterior
@@ -227,15 +228,13 @@ void menu(Lista *li, aluno dado) {
                 break;
         }
     } while (opcaoMenu != 14);
-
-    return;
 }
 
 void criar_dado(aluno *dado) {
-    printf("\nDigite a matricula do aluno: ");
+    printf("Digite a matricula do aluno: ");
     scanf("%d", &dado->matricula);
-    printf("\nDigite o nome do aluno: ");
+    printf("Digite o nome do aluno: ");
     scanf("%s", dado->nome);
-    printf("\nDigite a nota do aluno: ");
+    printf("Digite a nota do aluno: ");
     scanf("%f", &dado->nota);
 }

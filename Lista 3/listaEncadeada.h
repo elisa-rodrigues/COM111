@@ -3,7 +3,7 @@
 
 //typedef struct elemento* Lista;
 typedef struct aluno {
-    int matricula;
+    int matrsicula;
     char nome[30];
     float nota;
 } aluno;
@@ -37,7 +37,6 @@ int buscar_lista_posicao(Lista *li, int pos, aluno dado);
 int buscar_lista_dado(Lista *li, aluno dado, int *pos);
 
 int imprimir_lista(Lista *li);
-
 Lista *concatenar(Lista *li1, Lista *li2);
 void retorna_copia(Lista *li1, Lista **li2);
 void inverte_lista(Lista *li1, Lista **li2);
