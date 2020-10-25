@@ -297,43 +297,32 @@ void retorna_copia(Lista *li1, Lista **li2) {
 void inverte_lista(Lista *li1, Lista **li2) {
     if ((li1 == NULL || (*li1) == NULL)) return;
 
-    for (Elemento *aux = *li; aux != NULL; aux = aux->prox)
+    for (Elemento *aux = *li1; aux != NULL; aux = aux->prox)
         inserir_lista_inicio(*li2, aux->dado);
 }
 
 int verifica_ordenacao(Lista *li) {
-    Elemento *aux = *li;
-    int flag = 0;      // se 1 crescente, se 2 decrescente
-    int ordenado = 1;  // se 1 ordenado, se 0 nao ordenado
+    int flag = 1;  // 0 desordenado, 1 crescente, 2 decrescente
 
-    while (aux->prox != NULL) {
-        if (aux->dado.matricula != aux->prox->dado.matricula) {
-            if (flag == 0) {
-                if (aux->dado.matricula > aux->prox->dado.matricula) {
-                    flag = 2;
-                } else {
-                    flag = 1;
-                }
-            } else {
-                if (flag == 1) {
-                    if (aux->dado.matricula > aux->prox->dado.matricula) {
-                        ordenado = 0;
-                        break;
-                    }
-                } else {
-                    if (aux->dado.matricula < aux->prox->dado.matricula) {
-                        ordenado = 0;
-                        break;
-                    }
-                }
-            }
-            aux = aux->prox;
-        } else {
-            aux = aux->prox;
+    // se a lista só tiver um elemento então ela está ordenada
+    if ((*li)->prox == NULL) return flag;
+
+    // verifica se está ordenado em ordem crescente
+    for (Elemento *aux = *li; aux->prox != NULL; aux = aux->prox)
+        if (aux->dado.matricula > aux->prox->dado.matricula) {
+            flag = 2;
+            break;
         }
-    }
 
-    return ordenado;
+    // verifica se está ordenado em ordem decrescente
+    if (flag == 2)
+        for (Elemento *aux = *li; aux->prox != NULL; aux = aux->prox)
+            if (aux->dado.matricula < aux->prox->dado.matricula) {
+                flag = 0;
+                break;
+            }
+
+    return flag;
 }
 
 // função recursiva para obter o tamanho de uma lista
